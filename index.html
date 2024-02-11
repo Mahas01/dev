@@ -1,1 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Maze Game</title>
+<style>
+    body {
+        margin: 0;
+        padding: 0;
+        background-color: #222;
+        color: #fff;
+        font-family: Arial, sans-serif;
+    }
+    
+    #maze-container {
+        width: 400px;
+        margin: 20px auto;
+        position: relative;
+    }
+    
+    .maze-cell {
+        width: 20px;
+        height: 20px;
+        background-color: #444;
+        border: 1px solid #111;
+        position: absolute;
+    }
+    
+    .player {
+        background-color: #1abc9c;
+    }
+</style>
+</head>
+<body>
+<div id="maze-container"></div>
+<script>
+    const maze = [
+        [1, 0, 1, 1, 1],
+        [1, 1, 1, 0, 1],
+        [0, 0, 1, 1, 1],
+        [1, 1, 0, 0, 1],
+        [1, 1, 1, 1, 1]
+              [1, 0, 1, 1, 1],
+        [1, 1, 1, 0, 1],
+        [0, 0, 1, 1, 1],
+        [1, 1, 0, 0, 1],
+        [1, 1, 1, 1, 1]        [1, 0, 1, 1, 1],
+        [1, 1, 1, 0, 1],
+        [0, 0, 1, 1, 1],
+        [1, 1, 0, 0, 1],
+        [1, 1, 1, 1, 1]        [1, 0, 1, 1, 1],
+        [1, 1, 1, 0, 1],
+        [0, 0, 1, 1, 1],
+        [1, 1, 0, 0, 1],
+        [1, 1, 1, 1, 1]        [1, 0, 1, 1, 1],
+        [1, 1, 1, 0, 1],
+        [0, 0, 1, 1, 1],
+        [1, 1, 0, 0, 1],
+        [1, 1, 1, 1, 1]        [1, 0, 1, 1, 1],
+        [1, 1, 1, 0, 1],
+        [0, 0, 1, 1, 1],
+        [1, 1, 0, 0, 1],
+        [1, 1, 1, 1, 1]        [1, 0, 1, 1, 1],
+        [1, 1, 1, 0, 1],
+        [0, 0, 1, 1, 1],
+        [1, 1, 0, 0, 1],
+        [1, 1, 1, 1, 1]        [1, 0, 1, 1, 1],
+        [1, 1, 1, 0, 1],
+        [0, 0, 1, 1, 1],
+        [1, 1, 0, 0, 1],
+        [1, 1, 1, 1, 1]        [1, 0, 1, 1, 1],
+        [1, 1, 1, 0, 1],
+        [0, 0, 1, 1, 1],
+        [1, 1, 0, 0, 1],
+        [1, 1, 1, 1, 1]        [1, 0, 1, 1, 1],
+        [1, 1, 1, 0, 1],
+        [0, 0, 1, 1, 1],
+        [1, 1, 0, 0, 1],
+        [1, 1, 1, 1, 1]
+
+      
+    ];
+
+    const mazeContainer = document.getElementById('maze-container');
+
+    function createMaze() {
+        for (let i = 0; i < maze.length; i++) {
+            for (let j = 0; j < maze[i].length; j++) {
+                const cell = document.createElement('div');
+                cell.classList.add('maze-cell');
+                cell.style.top = i * 20 + 'px';
+                cell.style.left = j * 20 + 'px';
+                if (maze[i][j] === 0) {
+                    cell.style.backgroundColor = '#333';
+                }
+                mazeContainer.appendChild(cell);
+            }
+        }
+    }
+
+    function movePlayer(event) {
+        const key = event.key;
+        let top = parseInt(player.style.top);
+        let left = parseInt(player.style.left);
+
+        if (key === 'ArrowUp' && top > 0 && maze[top / 20 - 1][left / 20] === 1) {
+            top -= 20;
+        } else if (key === 'ArrowDown' && top < maze.length * 20 - 20 && maze[top / 20 + 1][left / 20] === 1) {
+            top += 20;
+        } else if (key === 'ArrowLeft' && left > 0 && maze[top / 20][left / 20 - 1] === 1) {
+            left -= 20;
+        } else if (key === 'ArrowRight' && left < maze[0].length * 20 - 20 && maze[top / 20][left / 20 + 1] === 1) {
+            left += 20;
+        }
+
+        player.style.top = top + 'px';
+        player.style.left = left + 'px';
+
+        if (top === maze.length * 20 - 20 && left === maze[0].length * 20 - 20) {
+            alert('Congratulations! You have reached the end of the maze!');
+        }
+    }
+
+    createMaze();
+
+    const player = document.createElement('div');
+    player.classList.add('maze-cell', 'player');
+    player.style.top = '0px';
+    player.style.left = '0px';
+    mazeContainer.appendChild(player);
+
+    window.addEventListener('keydown', movePlayer);
+</script>
+</body>
+</html>
 
